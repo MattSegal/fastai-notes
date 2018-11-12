@@ -1,5 +1,7 @@
 # Fast AI Course
 
+Lesson 3 33 min
+
 My notes and scripts and whatnot for Fast AI
 
 forums.fast.ai
@@ -20,3 +22,6 @@ ssh -N -L localhost:8888:localhost:8889 paperspace@paperspace
 ```
 
 kaggle-cli
+
+Reshama has done some nice tutorials on using AWS
+https://github.com/reshamas/fastai_deeplearn_part1

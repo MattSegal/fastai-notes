@@ -147,11 +147,11 @@ Train with 224 x 224 images then use 299 x 299 size images:
 
 Apparently it works with "fully conolutional" architectures which can handle arbitrarily sized input images. This apparently helps prevent overfiting... somehow.
 
-
 Some pre-trained networks:
     - resnet34
     - resnext50 - trains longer and consumes more memory
 
 ### AWS
 
-There is a fastai pt1 v2 AMI on AWS - p2.xlarge
+There is a fastai pt1 v2 AMI on AWS - use a p2.xlarge
+
