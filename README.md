@@ -25,3 +25,7 @@ kaggle-cli
 
 Reshama has done some nice tutorials on using AWS
 https://github.com/reshamas/fastai_deeplearn_part1
+
+
+setosa.io/ev/
+otavio's vid
