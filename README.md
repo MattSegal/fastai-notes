@@ -12,13 +12,8 @@ GPU box setup [here](https://github.com/reshamas/fastai_deeplearn_part1/blob/mas
 
 Start notebook
 ```
-ssh paperspace@paperspace
-jupyter notebook --no-browser --port=8889 --NotebookApp.allow_remote_access=True
-```
-
-Port forward to GPU box
-```
-ssh -N -L localhost:8888:localhost:8889 paperspace@paperspace
+ssh  -L localhost:8888:localhost:8888 paperspace@paperspace
+jupyter notebook --no-browser --port=8888 --NotebookApp.allow_remote_access=True
 ```
 
 kaggle-cli
