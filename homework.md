@@ -25,10 +25,9 @@ Results:
 
 ### Understanding the Amazon from Space
 
-Kaggle comp [here](https://www.kaggle.com/c/
-planet-understanding-the-amazon-from-space)
+Kaggle comp [here](https://www.kaggle.com/c/planet-understanding-the-amazon-from-space)
 
-Multi label classification task, where each image may have many labels.
+Multi label classification task, where each image may have many labels. The fastai library does all the "one hot encoding"
 
 Had trouble training on 250x250 images (original width). I found good convergence training the final layer ontop of ResNet, but I found little-no improvement when I unfroze the ResNet layers and tried to train it.
 
