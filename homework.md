@@ -23,6 +23,28 @@ Results:
 - Validation loss of 0.03
 - Test loss of 0.08
 
-### Ships in Satellite Imagery
+### Understanding the Amazon from Space
 
-Kaggle comp [here](https://www.kaggle.com/rhammell/ships-in-satellite-imagery/home)
+Kaggle comp [here](https://www.kaggle.com/c/
+planet-understanding-the-amazon-from-space)
+
+Multi label classification task, where each image may have many labels.
+
+Had trouble training on 250x250 images (original width). I found good convergence training the final layer ontop of ResNet, but I found little-no improvement when I unfroze the ResNet layers and tried to train it.
+
+The learning rate finder produce a learning rate / loss curve that was very choppy and divergent. Maybe it's because I had trained my model into some sort of sharp local minima, but I'm not really sure.
+
+Downsizing to 64x64 images and training on those seems to work much better when I unfroze the ResNet layers.
+
+I'm also not sure why Jeremy likes changing image sizes for training in general. It seems kind of magical and there isn't a rigorous explanation in the course. I don't like the magic.
+
+The technique was:
+
+- train on 64x64 images (last layer only) (-1 loss)
+- train on 64x64 images (entire network) (-0.1 loss)
+- train on 128x128 images (last layer only) (-0.01 loss)
+- train on 128x128 images (entire network) (-0.01 loss)
+- train on 256x256 images (last layer only) (-0.01 loss)
+- train on 256x256 images (entire network) (-0.01 loss)
+
+Kaggle wouldn't accept my submission because I'm missing 20k images in my test set (are those the included tiff files?), but I plotted some results and it looks good to me. Ship it!

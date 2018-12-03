@@ -87,6 +87,8 @@ How do we prevent overfitting?
 - Dumb down model (eg. fewer DOF)
 - Get more training data
 - Augmentation current training data
+- Use weight decay (TODO)
+- Use dropout (TODO)
 
 Possible image augmentations:
 
@@ -287,40 +289,10 @@ With softmax we'd receive a class index for our dataset (eg 3 of 5 classes) and 
 
 For multi label encoding we could receive a list of class indexes (3, 5) and turn it into a vector  [0, 0, 1, 0, 1]
 
-We can use sigmoid instead of softmax, because we get a nice output (0, 1)
+We can use sigmoid instead of softmax, because we get an output in the range (0, 1), which we can interpret as a probability. Each sigmoid output is independent of the others, so we can have multiple predictions for one input.
 
-```
-sigmoid_i = e^x_i / ( 1 +  e^x_i )
-```
 
-If we have an event with probability p, then the odds of that event are `odds(p) = p / (1 - p)`.
-
-As p varies [0, 1] the odds varies [0, +inf]
-
-The "logit" function is the logarithm of the odds `logit(p) = log(odds(p)) = log(p / (1 - p))`
-
-As p varies [0, 1] the odds varies [-inf, +inf], with most sensible values of about [0.001, 0.999] mapping to about [-5, 5]
-
-the inverse of the logit is the sigmoid
-
-todo: more here
-
-https://statisticalhorizons.com/whats-so-special-about-logit
-
-### Metrics
-
-We have been using "accuracy" as the metric that we want to optimize.
-
-We can thing of accuracy as `correct / total`
-
-We can think of this score as a function of the confusion matrix.
-
-There are other metrics that we could use as well, eg "f2", which is the "f-beta" function with beta=2.
-`fbeta_score` lives in SciPy.
-
-We can pass an array of metrics to `ConvLearner`
-
-### Structure
+### Structured Data
 
 Unstructured (all the things in the dataare the same kind of thing)
     - image
@@ -335,3 +307,5 @@ In structured data we need to represent _categories_ somehow, eg
 
 distance to kilometers is a number -> it's a float
 day of week is categorical -> it must be one-hot encoded into a vector
+
+
