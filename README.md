@@ -24,3 +24,4 @@ https://github.com/reshamas/fastai_deeplearn_part1
 
 setosa.io/ev/
 otavio's vid
+See fast.ai "How (and why) to create a good validation set"

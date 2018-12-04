@@ -87,8 +87,8 @@ How do we prevent overfitting?
 - Dumb down model (eg. fewer DOF)
 - Get more training data
 - Augmentation current training data
+- Use dropout
 - Use weight decay (TODO)
-- Use dropout (TODO)
 
 Possible image augmentations:
 
@@ -291,6 +291,15 @@ For multi label encoding we could receive a list of class indexes (3, 5) and tur
 
 We can use sigmoid instead of softmax, because we get an output in the range (0, 1), which we can interpret as a probability. Each sigmoid output is independent of the others, so we can have multiple predictions for one input.
 
+### Dropout
+
+Dropout is a technique where we set a given activation to 0 with some probabiility `p`.
+
+For example a dropout layer with `p=0.5` would, on average, cause half the activations that pass through that layer to be set to 0. This is done randomly for each minibatch. You may need to signal boost the non-deleted activations (eg if `p=0.5`, then boost remaining activations by 2).
+
+This is used to prevent overfitting. If the network relies some activation has learned to represent some _exact_ example, and that activation is 'dropped out', then the network will need to find how to use its other activations to represent that example. This technique aims to make the network more robust.
+
+This technique is used by the `fastai` library, and it explains why you can sometimes see validation loss that is _better_ than training loss. The training loss is calculated using dropout, but the validation loss is calculated without dropout.
 
 ### Structured Data
 
@@ -303,9 +312,133 @@ Structured data
     - profit / loss statement
     - survey results
 
-In structured data we need to represent _categories_ somehow, eg
+We have different type of data:
+    - continuous quantities (distance, k.m)
+    - discrete categories (type of fruit, brand of soap)
+    - ambiguous (year, day of week)
 
-distance to kilometers is a number -> it's a float
-day of week is categorical -> it must be one-hot encoded into a vector
+Quantities are easily represented as a float. We use quantities when the difference or ratio between different values are meaningful to us. Otherwise we use categories. Categories must be encoded somehow. One way to do it is to encode each category as a one-hot vector.
+
+We can also reserve a null category "unknown", for when we see a category that we haven't seen before.
+
+At a high level, using `fastai`, we want to
+    - identify our categorical and continuous variables
+    - whack it all in a dataframe
+    - pick validation rows
+    - create a ModelData instance
+    - define category embedding sizes
+    - get a `learner` instance
+    - train the learner
+
+Jeremy isn't sure how to do data augmentation on this data, but he thinks it's possible in theory.
+
+### Preparing Continuous Data
+
+It's a good idea to normalize continuous input data. This prevents our weights from having to be very large or small, it prevents one feature from dominating activations with initial random weights. One method for normalization is to assume a normal distribution, subtract the mean and divide by the standard deviation. This would work well for human height:
+
+[176cm, 120cm, 190cm, ...] ==> [0.0, -7.5, 1.9, ...]
+
+This may not work as well for features that have a different underlying distribution, like a power law.
+
+### Embedding Categorical Data
+
+When we have nothing but continuous variables as an input to our network, then the network input is simple. Eg for a regression problem measuring $ spent on fast food p.a, the inputs:
+
+- salary ($/pa)
+- weight (kg)
+- age (years)
+
+could be normalized and inserted into an input vector:
+
+```
+
+ feature    value
+ -------    -----
+ salary     +0.2
+ age        -1.0  => 3x100  => ...  => output in $
+ weight     +2.3     matrix
+
+```
+
+What if we add a categorical variable describing their favourite AFL team? We would have to one-hot encode it into a 19x1 vector to pass it into a network. If we do this naievely we end up with a lot of sparse features:
+
+```
+
+ feature    value
+ -------    -----
+ salary     +0.2
+ age        -1.0  => 21x100 => ...  => output in $
+ weight     +2.3     matrix
+ crows      +0.0
+ lions      +0.0
+ blues      +0.0
+ magpies    +0.0
+ bombers    +0.0
+ dockers    +0.0
+ cats       +1.0
+ giants     +0.0
+ suns       +0.0
+ hawks      +0.0
+ kangaroos  +0.0
+ demons     +0.0
+ power      +0.0
+ tigers     +0.0
+ saints     +0.0
+ swans      +0.0
+ eagles     +0.0
+ bulldogs   +0.0
+
+```
+This is not ideal because we've moved from having 300 weights in the first layer to 2100, which is more computationally expensive. This gets even worse for 1000s of categories,
+
+There's also another issue where we've decoupled all the classes in the category from each other. For example some of these teams are from Melbourne, whereas some are inter-state. It would be good to be able to represent that fact, and other common features of football teams somehow. On one hand, if the feature is important, the 21x100 matrix and other downstream weights will learn a distributed representation of the feature, but if we can anticipate that there will be common features in a categorical input, we might as well tweak the network architecture to learn those abstractions early, so that we can use downstream weights to learn higher level abstractions.
+
+An alternative to appending categorical one-hot-encodings is to add an _embedding_ for the AFL club category to the input vector. Let's guess that there are about 4 features that describe each AFL club. What we can do is create a 19x4 lookup table which "embeds" our one-hot encoded category vector into these 4 features. Now our network looks like this:
+
+```
+
+                                feature    value
+                                -------    -----
+                                salary     +0.2
+ club       active              age        -1.0  => 7x100 => ...  => output in $
+ ----       ------              weight     +2.3     matrix
+ crows      +0.0    => 19x4 =>  club_1     +0.5
+ lions      +0.0       lookup   club_2     -1.1
+ blues      +0.0                club_3     +0.2
+ magpies    +0.0                club_4     +0.8
+ bombers    +0.0
+ dockers    +0.0
+ cats       +1.0
+ giants     +0.0
+ suns       +0.0
+ hawks      +0.0
+ kangaroos  +0.0
+ demons     +0.0
+ power      +0.0
+ tigers     +0.0
+ saints     +0.0
+ swans      +0.0
+ eagles     +0.0
+ bulldogs   +0.0
+
+```
+Now we are using 700 weights + a 76 weight lookup table instead of 2100 thanks to our embedding matrix, and we are also representing each item as a concept in 4 dimensional space, rather than a boolean flag. This is even more userful when we have categories with thousands of values, like zip codes. So how big do we make our embedding matrix? Jeremy has a rule of thumb: "cardinality divided by 2, no greater than 50".
+
+### Embedding Time Data
+
+We can use our domain knowledge to create hard-coded embeddings. For example in `fastai` there is an function to extract information from a date. From a single date we can extract:
+
+- Year
+- Month
+- Day
+- Day of week
+- Day of year
+- Is month end
+- Is month start
+- Is quater end
+- Is quater start
+- Is school holiday
+- Is national holiday
 
 
+LECTURE 4 1h 20min
