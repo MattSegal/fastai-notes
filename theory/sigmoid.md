@@ -38,10 +38,9 @@ sigmoid(x)      = e^x / ( 1 +  e^x )
 
 So... why use this as an activation function?
 
+In general our activation function for classfication needs to map some input value x from [-inf, inf] to [0, 1]. Sigmoid can do that, which is nice, but there are _lots_ of possible functions which also do that, so why sigmoid in particular?
+
 TODO
-
-In general our activation function for classfication needs to map some input value x from [-inf, inf] to [0, 1]
-
 
 #### Why Not Sigmoid?
 
