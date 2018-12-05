@@ -18,10 +18,7 @@ jupyter notebook --no-browser --port=8888 --NotebookApp.allow_remote_access=True
 
 kaggle-cli
 
-Reshama has done some nice tutorials on using AWS
-https://github.com/reshamas/fastai_deeplearn_part1
 
-
-setosa.io/ev/
-otavio's vid
-See fast.ai "How (and why) to create a good validation set"
+LINKS TODO
+- setosa.io/ev/
+- https://forums.fast.ai/t/30-best-practices/12344
