@@ -47,3 +47,23 @@ The technique was:
 - train on 256x256 images (entire network) (-0.01 loss)
 
 Kaggle wouldn't accept my submission because I'm missing 20k images in my test set (are those the included tiff files?), but I plotted some results and it looks good to me. Ship it!
+
+### Grocery Sales Forecasting (Rossman)
+
+Kaggle comp [here](https://www.kaggle.com/c/rossmann-store-sales). Rossmann is challenging you to predict 6 weeks of daily sales for 1,115 stores located across Germany.
+
+Submissions are evaluated on the Root Mean Square Percentage Error (RMSPE). The submission files should be csv that maps a store ID to a sale amount in dollars:
+
+```
+Id,Sales
+1,0
+2,0
+...
+```
+
+The files are:
+
+- train.csv: historical data including Sales
+- test.csv: historical data excluding Sales
+- sample_submission.csv: a sample submission file in the correct format
+- store.csv: supplemental information about the stores
