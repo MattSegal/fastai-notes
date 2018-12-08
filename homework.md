@@ -67,3 +67,22 @@ The files are:
 - test.csv: historical data excluding Sales
 - sample_submission.csv: a sample submission file in the correct format
 - store.csv: supplemental information about the stores
+
+Overall, the experience was mixed. The good:
+
+- I decided not to incorporate Google trends or weather data into my dataset
+- I saw a lot of pandas tricks by replicating the data cleaning:
+    - merging data in different CSVs using dataframes
+    - saving dataframes to feather files
+- I saw a few cool data prep tricks:
+    - extracting features from timestamps
+    - filling in null values
+    - "rephrasing" date columns, eg: "open since date" => "num days open"
+    - removing data that should never appear (eg. < 0)
+    - transforming discrete events into continuous "days before" and "days after" fields
+    - adding rolling sums for multi day events
+
+The bad:
+
+- 99% of the time was spent wrangling data
+- My model achieved way worse performance than the demo model and I don't know why, and I can't really be bothered finding out for this one.
