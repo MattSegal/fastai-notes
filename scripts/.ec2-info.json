@@ -9,7 +9,7 @@
                     "InstanceId": "i-084fc8204dcc8e44a",
                     "InstanceType": "p2.xlarge",
                     "KeyName": "aws-fastai",
-                    "LaunchTime": "2018-12-08T02:34:21.000Z",
+                    "LaunchTime": "2018-12-08T07:35:17.000Z",
                     "Monitoring": {
                         "State": "disabled"
                     },
@@ -21,8 +21,8 @@
                     "PrivateDnsName": "ip-172-31-26-174.ap-southeast-2.compute.internal",
                     "PrivateIpAddress": "172.31.26.174",
                     "ProductCodes": [],
-                    "PublicDnsName": "ec2-13-236-66-181.ap-southeast-2.compute.amazonaws.com",
-                    "PublicIpAddress": "13.236.66.181",
+                    "PublicDnsName": "ec2-54-153-173-188.ap-southeast-2.compute.amazonaws.com",
+                    "PublicIpAddress": "54.153.173.188",
                     "State": {
                         "Code": 16,
                         "Name": "running"
@@ -50,8 +50,8 @@
                         {
                             "Association": {
                                 "IpOwnerId": "amazon",
-                                "PublicDnsName": "ec2-13-236-66-181.ap-southeast-2.compute.amazonaws.com",
-                                "PublicIp": "13.236.66.181"
+                                "PublicDnsName": "ec2-54-153-173-188.ap-southeast-2.compute.amazonaws.com",
+                                "PublicIp": "54.153.173.188"
                             },
                             "Attachment": {
                                 "AttachTime": "2018-12-08T02:34:21.000Z",
@@ -77,8 +77,8 @@
                                 {
                                     "Association": {
                                         "IpOwnerId": "amazon",
-                                        "PublicDnsName": "ec2-13-236-66-181.ap-southeast-2.compute.amazonaws.com",
-                                        "PublicIp": "13.236.66.181"
+                                        "PublicDnsName": "ec2-54-153-173-188.ap-southeast-2.compute.amazonaws.com",
+                                        "PublicIp": "54.153.173.188"
                                     },
                                     "Primary": true,
                                     "PrivateDnsName": "ip-172-31-26-174.ap-southeast-2.compute.internal",
