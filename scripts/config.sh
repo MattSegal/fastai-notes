@@ -43,7 +43,7 @@ virtualenv -p python3 env
 
 pip3 install \
     jupyter \
-    torch \
+    torch==0.4.1 \
     torchvision \
     torchtext \
     dill \
