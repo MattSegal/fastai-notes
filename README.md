@@ -6,10 +6,11 @@ forums.fast.ai
 course.fast.ai
 
 Infrastructure setup:
-    - AWS Ubuntu 18.04 EC2 on p2.xlarge
-    - configured using `scripts/config.sh`
-    - added personal SSH keys
-    - added kaggle-cli
+
+- AWS Ubuntu 18.04 EC2 on p2.xlarge
+- configured using `scripts/config.sh`
+- added personal SSH keys
+- added kaggle-cli
 
 
 Stuff to do:
