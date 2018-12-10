@@ -55,6 +55,7 @@ pip3 install \
     opencv-python \
     spacy \
     pandas \
+    feather-format \
     seaborn \
     graphviz \
     sklearn_pandas \
