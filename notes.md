@@ -40,4 +40,3 @@ Apparently it works with "fully conolutional" architectures which can handle arb
 Some pre-trained networks:
     - resnet34
     - resnext50 - trains longer and consumes more memory
-

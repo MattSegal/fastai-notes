@@ -16,3 +16,4 @@ Infrastructure setup:
 Stuff to do:
 - setosa.io/ev/
 - https://forums.fast.ai/t/30-best-practices/12344
+- A systematic study of the class imbalance problem in CNNs
