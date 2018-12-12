@@ -13,7 +13,20 @@ Infrastructure setup:
 - added kaggle-cli
 
 
-Stuff to do:
+to read:
 - setosa.io/ev/
 - https://forums.fast.ai/t/30-best-practices/12344
 - A systematic study of the class imbalance problem in CNNs
+- initialization of deep networks in the case of rectifiers... or something
+
+to implement
+- movielens collaborative filtering with PyTorch
+- stochastic gradient descent with restarts
+- dropout
+- l2 regularization
+- data augmentation
+- test time augmentation
+- inference from saved model on new data
+- review `fit` from fastai
+- gradient clipping
+

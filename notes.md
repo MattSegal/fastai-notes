@@ -40,3 +40,18 @@ Apparently it works with "fully conolutional" architectures which can handle arb
 Some pre-trained networks:
     - resnet34
     - resnext50 - trains longer and consumes more memory
+
+
+### Random notes
+
+In FastAI
+
+- Weight decay is L2 regularization?
+
+In Jupyter
+
+- `??x` to read source for function / class `x`
+
+In PyTorch
+
+- you can call .cuda() on nn.Module
