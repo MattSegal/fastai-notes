@@ -14,12 +14,12 @@ We can select an arbitrary embedding size, say `e = 5`, which we can use to crea
 
 N.B: There is an analytical solution available for this linear case.
 
-We can also add a constant bias term for both users and movies.
-
-#### Slightly Less Linear
-
-See `EmbeddingDotBias` in movielens notebook - uses sigmoid on output to clamp
+We can also add a constant bias term for both users and movies. We can also use a sigmoid to clamp the values at the end.
 
 #### WWW
 
 L5 1:18:30
+
+user id | item id | rating | timestamp.
+/root/data/movielens
+u.data
