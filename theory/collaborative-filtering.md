@@ -18,7 +18,4 @@ We can also add a constant bias term for both users and movies. We can also use 
 
 #### Neural Net Collaborative Filtering
 
-concat embeddings then feed as input vector into NN
-
-L5 1:32
-
+We can concatenate these movie / user embeddings into a single vector, and then feed that vector into a fully connected neural network.
