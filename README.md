@@ -18,6 +18,10 @@ to read:
 - https://forums.fast.ai/t/30-best-practices/12344
 - A systematic study of the class imbalance problem in CNNs
 - initialization of deep networks in the case of rectifiers... or something
+- batch normalization
+- early stopping - http://www.iro.umontreal.ca/~bengioy/talks/DL-Tutorial-NIPS2015.pdf
+- OpenAI's gradient nosie metric for batch sizes - https://blog.openai.com/science-of-ai/
+- ADAM with warm restarts - https://arxiv.org/pdf/1711.05101.pdf
 
 to implement
 - movielens collaborative filtering with PyTorch
