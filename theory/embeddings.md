@@ -97,3 +97,13 @@ We can use our domain knowledge to create hard-coded embeddings. For example in 
 - Is quater start
 - Is school holiday
 - Is national holiday
+
+### Interpreting Embeddings
+
+Intepreting embeddings seems to be mostly informed guesswork. You can rank or cluster your data based on their embedding values and impose your own interpretation on them, hopefully with some domain knowledge.
+
+The bias term in the embedding is maybe the easiest parameter to interpret. It captures features about the entitiy that are not well-explained by the input features. For example, the bias of a movie embedding in a movie rating predictor would capture whether a movie is widely liked by everyone, or widely reviled, regardless of who is watching it. In the movie rating case, we could rank all the movies by their embedding bias and interpret the movies with the highest bias as the most widely liked. It's not clear to me whether this method has an advantage over just ranking movies by their average rating.
+
+You can also use principal component analysis (PCA) on all the embedding parameters to produce a small number of variables which explain most of the variance between different entities. This is done by taking some linear combination of the embedding parameters (I think?).
+
+This is handy because it's hard to visualize a 50 dimensional embedding vector, but if we project that vector onto a 2D space then we can look at it on a graph. We may be able to inspect the clusters of embeddings and interpret the values of the low-dimensional representation.

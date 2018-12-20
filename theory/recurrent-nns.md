@@ -29,3 +29,9 @@ The biggest problem you will face is stationarity: the statistical properties of
 
 From my experience, LSTM or other recurrent neural network models only work "well" at forecasting bounded and periodic or oscillating time series. Might work for something like seasonal sale data, but would fail spectacularly with unbounded and chaotic time series like stock prices.
 
+### RNNs
+
+RNNs are useful for sequences of data. Why do we need RNNs?
+
+- We want to keep track of long term dependencies between sequential observations. We need some kind of memory.
+- We want to be able to ingest variable length sequences.
