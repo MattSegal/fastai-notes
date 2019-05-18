@@ -63,8 +63,9 @@ pip3 install \
     isoweek \
     pandas_summary \
     tqdm \
-    matplotlib
+    matplotlib \
+    gensim
 
 python3 -m spacy download en
 
-git clone https://github.com/fastai/courses.git
+#git clone https://github.com/fastai/courses.git

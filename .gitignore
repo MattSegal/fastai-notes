@@ -2,3 +2,4 @@
 .ec2-ip.sh
 fastai
 .ipynb_checkpoints/
+env/
